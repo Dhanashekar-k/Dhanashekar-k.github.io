@@ -1,10 +1,435 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dhanashekar Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhanashekar Kandaswamy</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --line: #e2e8f0;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --max: 980px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: min(var(--max), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 4rem 0 2rem;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(to bottom, #ffffff, #f8fafc);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.5fr 0.9fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.25rem;
+      font-weight: 600;
+    }
+
+    .portrait {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 1rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+    }
+
+    .portrait img {
+      width: 100%;
+      aspect-ratio: 1 / 1.1;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+      background: #e5e7eb;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(248, 250, 252, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav .container {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 0.85rem 0;
+    }
+
+    nav a {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    section {
+      padding: 3.5rem 0;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      margin: 0 0 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      max-width: 780px;
+      margin-bottom: 1.5rem;
+    }
+
+    .papers {
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    .paper {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 1.25rem;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 1rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    }
+
+    .paper img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 14px;
+      background: #e5e7eb;
+    }
+
+    .paper h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1.12rem;
+      line-height: 1.35;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 0.75rem 0;
+    }
+
+    .tag {
+      font-size: 0.83rem;
+      padding: 0.28rem 0.65rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #1d4ed8;
+      font-weight: 600;
+    }
+
+    .paper-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-weight: 600;
+      margin-top: 0.65rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 1.2rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 0.6rem;
+    }
+
+    .item + .item {
+      border-top: 1px solid var(--line);
+      padding-top: 0.9rem;
+      margin-top: 0.9rem;
+    }
+
+    footer {
+      padding: 2.5rem 0 4rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 820px) {
+      .hero,
+      .paper,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        padding-top: 2.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, I'm Dhanashekar 🚀</h1>
-  <p>Welcome to my portfolio website.</p>
+  <header>
+    <div class="container hero">
+      <div>
+        <h1>Dhanashekar Kandaswamy</h1>
+        <p>
+          I am a Master's student in Computer Science at The Ohio State University, focused on agentic AI systems,
+          multimodal retrieval, protocol security, and practical machine learning systems. My work spans long-context
+          reasoning, RAG pipelines, multimodal understanding, and real-world AI deployment.
+        </p>
+        <p>
+          I have built systems across surveillance intelligence, legal AI, blockchain transaction analysis, and
+          protocol-driven attack generation, with experience in LangGraph, vector databases, cloud tooling, and
+          scalable AI workflows.
+        </p>
+        <div class="links">
+          <a href="mailto:iamdhanashekar.k@gmail.com">Email</a>
+          <a href="https://github.com/Dhanashekar-k" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/dhanashekar-k-13565a1b3/" target="_blank">LinkedIn</a>
+          <a href="https://scholar.google.com/citations?user=IOf4rlAAAAAJ" target="_blank">Scholar</a>
+          <a href="https://www.dhanashekar.com" target="_blank">Website</a>
+          <a href="#research">Research</a>
+        </div>
+      </div>
+      <div class="portrait">
+        <img src="images/profile.jpg" alt="Dhanashekar profile photo" />
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#awards">Awards</a>
+      <a href="#teaching">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section id="research">
+    <div class="container">
+      <h2 class="section-title">Research</h2>
+      <p class="section-lead">
+        My interests include multimodal learning, agentic RAG, protocol-aware AI, long-context reasoning, and real-time
+        intelligent systems. I aim to build reliable systems that combine retrieval, reasoning, and structured decision-making
+        for complex, real-world problems.
+      </p>
+
+      <div class="papers">
+        <article class="paper">
+          <img src="images/fewshot-spt.jpg" alt="FewShot-SPT figure" />
+          <div>
+            <h3>Towards Secure Video Surveillance: A Few-Shot Spatiotemporal Perception Transformer for Unseen Behavioral Anomalies</h3>
+            <div class="meta">Jamuna S. Murthy, Dhanashekar Kandaswamy, Wen-Cheng Lai · IEEE AVSS, 2025</div>
+            <div class="tags">
+              <span class="tag">Few-Shot Learning</span>
+              <span class="tag">Anomaly Detection</span>
+              <span class="tag">Transformers</span>
+              <span class="tag">Multimodal AI</span>
+            </div>
+            <p>
+              A transformer-based framework for few-shot anomaly detection in surveillance videos, designed for real-time
+              multimodal understanding under practical edge constraints.
+            </p>
+            <div class="paper-links">
+              <a href="#">PDF</a>
+              <a href="#">Code</a>
+              <a href="#">Paper</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper">
+          <img src="images/legal-rag.jpg" alt="Legal assistant project figure" />
+          <div>
+            <h3>Legal Assistant Agent: Retrieval-Augmented Question Answering over Complex Legal Documents</h3>
+            <div class="meta">Project · 2024–2025</div>
+            <div class="tags">
+              <span class="tag">RAG</span>
+              <span class="tag">LangGraph</span>
+              <span class="tag">Document QA</span>
+              <span class="tag">LLM Systems</span>
+            </div>
+            <p>
+              Designed and deployed an AI-powered legal assistant for answering complex questions grounded in legal documents,
+              using retrieval pipelines, chunking, and structured response generation.
+            </p>
+            <div class="paper-links">
+              <a href="#">Demo</a>
+              <a href="#">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper">
+          <img src="images/protocol-security.jpg" alt="Protocol security figure" />
+          <div>
+            <h3>Agentic Attack Generation from Protocol Specifications for EV Charging Security</h3>
+            <div class="meta">Research Credits · The Ohio State University · 2025</div>
+            <div class="tags">
+              <span class="tag">Protocol Security</span>
+              <span class="tag">Long Context</span>
+              <span class="tag">Agentic Systems</span>
+              <span class="tag">Formal Reasoning</span>
+            </div>
+            <p>
+              Building an agentic system to process long protocol specifications and generate structured security attacks,
+              combining retrieval, reasoning, and specification-grounded analysis.
+            </p>
+            <div class="paper-links">
+              <a href="#">Overview</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container grid-2">
+      <div class="card">
+        <h2 class="section-title">Selected Projects</h2>
+        <div class="item">
+          <h3>Hysterectomy Video-to-Text</h3>
+          <p>Built a surgical video captioning pipeline using a Vision Transformer with custom cross-attention to generate step-wise summaries from procedure videos.</p>
+        </div>
+        <div class="item">
+          <h3>SanskritiGenAI</h3>
+          <p>Developed a multilingual generative NLP system for culturally grounded text generation across multiple Indian languages.</p>
+        </div>
+        <div class="item">
+          <h3>Blockchain User Scoring</h3>
+          <p>Built scoring algorithms and AI agent workflows for analyzing transactions across DEX, lending, and perpetual protocols.</p>
+        </div>
+      </div>
+
+      <div class="card" id="experience">
+        <h2 class="section-title">Experience</h2>
+        <div class="item">
+          <h3>Research Credits, The Ohio State University</h3>
+          <p><strong>Aug 2025 – Dec 2025</strong><br />Generated security attacks from protocol specifications and built long-context agentic systems for structured reasoning.</p>
+        </div>
+        <div class="item">
+          <h3>AI Engineer Intern, Zeru Technologies</h3>
+          <p><strong>Jun 2025 – Aug 2025</strong><br />Built scoring algorithms for on-chain users and developed AI agents for blockchain transaction analysis.</p>
+        </div>
+        <div class="item">
+          <h3>Product Developer Intern, CoCreate Ventures</h3>
+          <p><strong>Jan 2024 – Jul 2024</strong><br />Developed forecasting models, real-time vision pipelines, and motion-guided video alignment systems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="awards">
+    <div class="container grid-2">
+      <div class="card">
+        <h2 class="section-title">Awards & Certifications</h2>
+        <div class="item">
+          <h3>Smart India Hackathon 2023 Winner</h3>
+          <p>Built an AI-guided interface for real-time machinery operation and anomaly detection.</p>
+        </div>
+        <div class="item">
+          <h3>AWS Certified Solutions Architect – Associate</h3>
+          <p>Valid Nov 2024 – Nov 2027.</p>
+        </div>
+        <div class="item">
+          <h3>LangGraph / MCP / Generative AI Certifications</h3>
+          <p>Focused on agentic workflows, AI agents, and modern LLM tooling.</p>
+        </div>
+      </div>
+
+      <div class="card" id="teaching">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="item"><strong>Languages:</strong> Python, SQL</div>
+        <div class="item"><strong>Frameworks:</strong> LangGraph, LangChain, FastAPI</div>
+        <div class="item"><strong>LLMs & Tooling:</strong> OpenAI, Claude via Bedrock, Hugging Face Transformers</div>
+        <div class="item"><strong>RAG & DBs:</strong> FAISS, ChromaDB, Cassandra, vector search, document chunking</div>
+        <div class="item"><strong>Infra:</strong> AWS, Docker, Git</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container card">
+      <h2 class="section-title">Contact</h2>
+      <p>
+        Email: <a href="mailto:iamdhanashekar.k@gmail.com">iamdhanashekar.k@gmail.com</a><br />
+        Ohio State email: <a href="mailto:kandaswamy.6@buckeyemail.osu.edu">kandaswamy.6@buckeyemail.osu.edu</a><br />
+        GitHub: <a href="https://github.com/Dhanashekar-k" target="_blank">github.com/Dhanashekar-k</a><br />
+        LinkedIn: <a href="https://www.linkedin.com/in/dhanashekar-k-13565a1b3/" target="_blank">linkedin.com/in/dhanashekar-k-13565a1b3</a>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      Built as a clean GitHub Pages academic portfolio. Replace placeholder image paths, paper links, and project links with your own files.
+    </div>
+  </footer>
 </body>
 </html>
